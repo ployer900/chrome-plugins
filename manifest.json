@@ -1,0 +1,27 @@
+{
+    "manifest_version": 2,
+
+    "name": "Web Performance Analysis",
+    "description": "This extension allows web developer to analysis web performance.",
+    "version": "1.0",
+    "browser_action": {
+        "default_title": "web performance analysis",
+        "default_icon": "src/image/icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": [],
+            "js": ["src/js/content.scripts.js"]
+        }
+    ],
+    "background": {
+        "scripts": ["src/js/background.scripts.js"]
+    },
+    "devtools_page": "src/devtools.html",
+    "permissions": [
+        "tabs",
+        "https://*/*",
+        "http://*/*"
+    ]
+}
