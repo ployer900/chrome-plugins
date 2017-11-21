@@ -6,21 +6,22 @@
     "version": "1.0",
     "browser_action": {
         "default_title": "web performance analysis",
-        "default_icon": "src/image/icon.png"
+        "default_icon": "img/icon.png"
     },
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
             "css": [],
-            "js": ["src/js/content.scripts.js"]
+            "js": ["js/inject.bundle.js"]
         }
     ],
     "background": {
-        "scripts": ["src/js/background.scripts.js"]
+        "scripts": ["js/background.bundle.js"]
     },
-    "devtools_page": "src/devtools.html",
+    "devtools_page": "devtools.html",
     "permissions": [
         "tabs",
+        "activeTab",
         "https://*/*",
         "http://*/*"
     ]
