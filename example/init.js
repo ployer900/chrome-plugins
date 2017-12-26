@@ -1,42 +1,14 @@
-var Shape = require('../lib/canvas.shape.js');
+import React, { Component } from 'react'
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from '../src/app/container/App.jsx';
+import util from '../src/app/util/source.js';
+import store from '../src/app/store/index.js';
+// import './echarts.js';
 
-//获取静态资源
-function getAllStaticSource() {
-    var source = [];
-    if (window.performance.getEntries) {
-        source = window.performance.getEntries();
-    }
-    return source;
-}
-
-/**
- * 测试代码区
- */
-;(function() {
-    var canvas = document.getElementById('shape');
-    var ctx = canvas.getContext('2d');
-    canvas.width = document.documentElement.clientWidth || document.body.clientWidth;
-    canvas.height = document.documentElement.clientHeight || document.body.clientHeight;
-
-    var sources = getAllStaticSource();
-    var scripts = [];
-    var scriptLoadingDuration = [];
-    sources.forEach(function(source, i) {
-        if (source.initiatorType == 'script') {
-            scripts.push(source);
-            scriptLoadingDuration.push(source.duration);
-        }
-    });
-
-    var shape = new Shape('shape');
-    shape.drawDendrogram({
-        legendTitle: '',
-        originX: 400,
-        originY: 400,
-        width: 200,
-        height: 200,
-        lineWidth: 2,
-        offsetX: 20,
-        values: scriptLoadingDuration
-    });
-})();
+render(
+	<Provider store={store}>
+		<App getSource={util.getSource}/>
+	</Provider>,
+	document.getElementById('main')
+);

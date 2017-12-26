@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Hiragino Sans GB,Arial,Helvetica,'宋体',sans-serif;
+    font-size: 14px;
+    background-color: #fff;
+}
+.tabbarContainer {
+    padding: 10px;
+}
+.tabBar {
+    width: 100%;
+    border-bottom: 1px solid #d7d7d7;
+    .tabItem {
+        display: inline-block;
+        background-color: #fff;
+        border: 1px solid #d7d7d7;
+        border-bottom: none;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        padding: 8px;
+        margin: 0 2px;
+        cursor: pointer;
+        &.selected {
+            color: #ffd161;
+        }
+    }
+}
+.tabbarContent {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+}
