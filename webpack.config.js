@@ -7,7 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const IS_DEV = process.env.NODE_ENV === 'development';
 const extpath = path.join(__dirname, './src/browser/extension/');
 const extractLess = new ExtractTextPlugin({
-    filename: "[name].min.css",
+    filename: '[name].min.css',
     disable: IS_DEV
 });
 
@@ -23,8 +23,7 @@ const config = {
         filename: 'js/[name].bundle.js'
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.jsx?$/,
                 use: 'babel-loader',
                 exclude: /node_modules/
@@ -32,9 +31,12 @@ const config = {
             {
                 test: /\.less$/,
                 use: extractLess.extract({
-                    use: [
-                        {
-                            loader: 'css-loader'
+                    use: [{
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                localIdentName: '[local]__[hash:base64:5]'
+                            }
                         },
                         {
                             loader: 'less-loader'
@@ -60,16 +62,15 @@ const config = {
             inject: 'body',
             chunks: ['devpanel']
         }),
-        new CopyWebpackPlugin([
-                {
-                    from: './src/assets/img',
-                    to: 'img'
-                },
-                {
-                    from: `${extpath}manifest.json`,
-                    to: ''
-                }
-            ]),
+        new CopyWebpackPlugin([{
+                from: './src/assets/img',
+                to: 'img'
+            },
+            {
+                from: `${extpath}manifest.json`,
+                to: ''
+            }
+        ]),
         extractLess
     ],
 
@@ -87,7 +88,8 @@ if (IS_DEV) {
             template: './example/canvas.html',
             inject: 'body',
             chunks: ['example']
-        })
+        }),
+        extractLess
     ];
     config.devServer = {
         host: '0.0.0.0',
